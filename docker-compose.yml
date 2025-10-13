@@ -1,22 +1,28 @@
-0version: '3'
+version: "3.8"
+
 services:
-  frontend: 
-    container_name: frontend
+
+  frontend_app: 
+    hostname: frontend_app
+    container_name: frontend_app
+    restart: always
     build: 
       context: frontend/
-    image: fronted-image
+    image: frontend_app
     ports: 
       - "3000:80"
     depends_on:
-      - backend
+      - backend_app
     networks:
       - three-tier-net 
 
-  backend:
-    container_name: backend
+  backend_app:
+    hostname: backend_app
+    container_name: backend_app
+    restart: always
     build: 
       context: backend/
-    image: backend-image
+    image: backend_app
     ports: 
       - "3500:3500"
     environment:
@@ -30,8 +36,10 @@ services:
       - three-tier-net
 
   db:
-    container_name: mysql-container
-    image: mysql:latest
+    hostname: mysql
+    container_name: mysql
+    image: mysql
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=mysql123
       - MYSQL_DATABASE=school
@@ -43,6 +51,7 @@ services:
  
 volumes:
   mysql-data:
+    name: mysql-data
 
 networks:
   three-tier-net:
