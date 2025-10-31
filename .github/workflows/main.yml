@@ -34,7 +34,7 @@ jobs:
       with:
         host: ${{ secrets.13.203.78.47 }}
         username: ubuntu
-        key: ${{ secrets.EC2_KEY }}
+        key: ${{ secrets.NEW1 }}
         script: |
           cd /home/ubuntu/3-tier-project
 
